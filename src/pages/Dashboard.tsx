@@ -1,44 +1,63 @@
 import { useEffect, useState } from "react";
 import { GlassCard } from "@/components/GlassCard";
-import { Users, BookOpen, Shield, Activity } from "lucide-react";
+import { Users, BookOpen, Shield, Activity, Book, GraduationCap, Clock, Award } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLearningProgress } from "@/hooks/useLearningProgress";
+import { useStudentStats } from "@/hooks/useStudentStats";
+import { useContractRead } from 'wagmi';
+import { STUDENT_REGISTRY_ADDRESS } from "@/lib/constants";
+import studentRegistryAbi from "@/contracts/abi/StudentRegistry.json";
 
 export default function Dashboard() {
-  const [blockNumber, setBlockNumber] = useState<number>(0);
+  const { totalStudents, blockNumber, loading, error } = useStudentStats();
   const { getProgress } = useLearningProgress();
   const totalTopics = 7; // Total Solidity topics
+  const [courseStats, setCourseStats] = useState({
+    totalCourses: 0,
+    activeStudents: 0,
+  });
+
+  // Fetch course stats from CourseManager contract
+  const { data: courseCount, isLoading: isLoadingCourses } = useContractRead({
+    address: STUDENT_REGISTRY_ADDRESS,
+    abi: studentRegistryAbi,
+    functionName: 'getCoursesCount',
+    watch: true,
+  });
 
   useEffect(() => {
-    // Simulate fetching block info
-    const fetchBlockInfo = async () => {
-      // In a real app, this would fetch from the blockchain
-      setBlockNumber(Math.floor(Math.random() * 1000000) + 18000000);
-    };
-    fetchBlockInfo();
-  }, []);
+    if (courseCount !== undefined) {
+      setCourseStats(prev => ({
+        ...prev,
+        totalCourses: Number(courseCount) || 0,
+      }));
+    }
+  }, [courseCount]);
 
   const stats = [
     {
       title: "Registered Students",
-      value: "42",
+      value: loading ? "..." : totalStudents.toString(),
       icon: Users,
       color: "text-blue-400",
       bgColor: "bg-blue-500/10",
+      loading,
     },
     {
-      title: "Current Topic",
-      value: "Smart Contracts",
-      icon: BookOpen,
+      title: "Available Courses",
+      value: isLoadingCourses ? "..." : courseStats.totalCourses.toString(),
+      icon: Book,
       color: "text-purple-400",
       bgColor: "bg-purple-500/10",
+      loading: isLoadingCourses,
     },
     {
-      title: "Learning Progress",
-      value: `${getProgress(totalTopics)}%`,
-      icon: Activity,
+      title: "Active Students",
+      value: loading ? "..." : Math.floor(totalStudents * 0.7).toString(), // Example calculation
+      icon: GraduationCap,
       color: "text-green-400",
       bgColor: "bg-green-500/10",
+      loading,
     },
     {
       title: "Block Number",
@@ -46,6 +65,23 @@ export default function Dashboard() {
       icon: Shield,
       color: "text-ethereum",
       bgColor: "bg-ethereum/10",
+      loading: false,
+    },
+    {
+      title: "Learning Progress",
+      value: `${getProgress(totalTopics)}%`,
+      icon: Activity,
+      color: "text-yellow-400",
+      bgColor: "bg-yellow-500/10",
+      loading: false,
+    },
+    {
+      title: "Certificates Issued",
+      value: loading ? "..." : Math.floor(totalStudents * 0.4).toString(), // Example calculation
+      icon: Award,
+      color: "text-pink-400",
+      bgColor: "bg-pink-500/10",
+      loading,
     },
   ];
 
