@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { Home, Book, Network, Code2, X } from "lucide-react";
+import { Home, Book, Network, Code2, X, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -13,6 +13,7 @@ const navItems = [
   { path: "/solidity-notes", icon: Code2, label: "Solidity Notes" },
   { path: "/ethereum-notes", icon: Network, label: "Ethereum Notes" },
   { path: "/contract-interaction", icon: Book, label: "Contract Interaction" },
+  { path: "/student-registry", icon: Users, label: "Student Registry" },
 ];
 
 export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {

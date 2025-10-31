@@ -1,0 +1,231 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/home/localhost/Desktop/learn-solidity-quest/contracts/BaseContract.sol": {
+      "lastModificationDate": 1761915807642,
+      "contentHash": "a078eeb82048f93f86aef5b30bcb20a6",
+      "sourceName": "contracts/BaseContract.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "BaseContract"
+      ]
+    },
+    "/home/localhost/Desktop/learn-solidity-quest/contracts/StudentRegistry.sol": {
+      "lastModificationDate": 1761915846174,
+      "contentHash": "fcb0487c7a0eb89b9887cb61d03c15ae",
+      "sourceName": "contracts/StudentRegistry.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./BaseContract.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "StudentRegistry"
+      ]
+    },
+    "/home/localhost/Desktop/learn-solidity-quest/contracts/CourseManager.sol": {
+      "lastModificationDate": 1761915878302,
+      "contentHash": "ccefd2b219d12e4484579d47bc4b9a0b",
+      "sourceName": "contracts/CourseManager.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./BaseContract.sol",
+        "./StudentRegistry.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "CourseManager"
+      ]
+    },
+    "/home/localhost/Desktop/learn-solidity-quest/contracts/Certificate.sol": {
+      "lastModificationDate": 1761915970249,
+      "contentHash": "8588975e6c8b8f1f5d66d577b854dcc7",
+      "sourceName": "contracts/Certificate.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./StudentRegistry.sol",
+        "./CourseManager.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Certificate"
+      ]
+    },
+    "/home/localhost/Desktop/learn-solidity-quest/contracts/LibraryExample.sol": {
+      "lastModificationDate": 1761915934344,
+      "contentHash": "054ab3c33da66b7620c17501e501b367",
+      "sourceName": "contracts/LibraryExample.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./StringUtils.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "LibraryExample"
+      ]
+    },
+    "/home/localhost/Desktop/learn-solidity-quest/contracts/StringUtils.sol": {
+      "lastModificationDate": 1761915901784,
+      "contentHash": "b659905b6394714af74e3c758c3a0763",
+      "sourceName": "contracts/StringUtils.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "StringUtils"
+      ]
+    }
+  }
+}

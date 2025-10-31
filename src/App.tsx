@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Web3ModalProvider } from "@/providers/Web3Provider";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { Sidebar } from "@/components/Sidebar";
@@ -12,9 +12,9 @@ import Dashboard from "./pages/Dashboard";
 import SolidityNotes from "./pages/SolidityNotes";
 import EthereumNotes from "./pages/EthereumNotes";
 import ContractInteraction from "./pages/ContractInteraction";
+import StudentRegistryPage from "./pages/StudentRegistryPage";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
 
 const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -30,7 +30,7 @@ const App = () => {
   }, [isDarkMode]);
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <Web3ModalProvider>
       <TooltipProvider>
         <Toaster />
         <Sonner />
@@ -51,6 +51,7 @@ const App = () => {
                   <Route path="/solidity-notes" element={<SolidityNotes />} />
                   <Route path="/ethereum-notes" element={<EthereumNotes />} />
                   <Route path="/contract-interaction" element={<ContractInteraction />} />
+                  <Route path="/student-registry" element={<StudentRegistryPage />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
@@ -58,7 +59,7 @@ const App = () => {
           </div>
         </BrowserRouter>
       </TooltipProvider>
-    </QueryClientProvider>
+    </Web3ModalProvider>
   );
 };
 
