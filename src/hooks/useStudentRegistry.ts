@@ -106,13 +106,24 @@ export const useStudentRegistry = () => {
   // Register a new student
   const handleRegisterStudent = async (name: string, age: number, course: string, level: StudentLevel) => {
     if (!isConnected) throw new Error('Please connect your wallet');
+    if (!registerStudent) throw new Error('Contract function not initialized');
     
-    return registerStudent({
-      abi: STUDENT_REGISTRY_ABI,
-      address: STUDENT_REGISTRY_ADDRESS,
-      functionName: 'registerStudent',
-      args: [name, BigInt(age), course, level],
-    });
+    try {
+      console.log('Registering student with:', { name, age, course, level });
+      
+      const result = await registerStudent({
+        abi: STUDENT_REGISTRY_ABI,
+        address: STUDENT_REGISTRY_ADDRESS,
+        functionName: 'registerStudent',
+        args: [name, BigInt(age), course, Number(level)],
+      });
+      
+      console.log('Registration successful:', result);
+      return result;
+    } catch (error) {
+      console.error('Error in handleRegisterStudent:', error);
+      throw error;
+    }
   };
 
   // Update student course

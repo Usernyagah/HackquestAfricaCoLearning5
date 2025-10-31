@@ -109,19 +109,28 @@ export function StudentRegistration() {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="level">Skill Level</Label>
+            <Label>Level</Label>
             <Select 
-              value={level.toString()} 
-              onValueChange={(value) => setLevel(parseInt(value, 10) as StudentLevel)}
+              value={level.toString()}
+              onValueChange={(value) => {
+                console.log('Selected level:', value);
+                setLevel(Number(value) as StudentLevel);
+              }}
               disabled={loading}
             >
               <SelectTrigger>
                 <SelectValue placeholder="Select level" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value={StudentLevel.Beginner.toString()}>Beginner</SelectItem>
-                <SelectItem value={StudentLevel.Intermediate.toString()}>Intermediate</SelectItem>
-                <SelectItem value={StudentLevel.Advanced.toString()}>Advanced</SelectItem>
+                <SelectItem value={StudentLevel.Beginner.toString()}>
+                  Beginner
+                </SelectItem>
+                <SelectItem value={StudentLevel.Intermediate.toString()}>
+                  Intermediate
+                </SelectItem>
+                <SelectItem value={StudentLevel.Advanced.toString()}>
+                  Advanced
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
