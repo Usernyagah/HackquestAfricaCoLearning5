@@ -14,7 +14,7 @@ export function StudentRegistration() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
 
-  const { account, connectWallet, registerStudent, isOwner } = useStudentRegistry();
+  const { account, connectWallet, registerStudent: registerStudentHandler, isOwner } = useStudentRegistry();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,7 +37,7 @@ export function StudentRegistration() {
       setLoading(true);
       setMessage(null);
       
-      await registerStudent(name, parseInt(age, 10), course, level);
+      await registerStudentHandler(name, parseInt(age, 10), course, level);
       
       setMessage({ 
         text: 'Student registered successfully!', 
