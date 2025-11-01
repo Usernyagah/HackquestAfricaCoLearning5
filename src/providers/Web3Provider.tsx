@@ -12,7 +12,7 @@ const projectId = '67fc3d6d79a1c2cae31905973096afec';
 const metadata = {
   name: 'Solidity Learner',
   description: 'Interactive Solidity learning platform',
-  url: 'http://localhost:5173',
+  url: 'https://hackquestafricacolearning5.vercel.app',
   icons: ['https://avatars.githubusercontent.com/u/37784886']
 };
 

@@ -1,6 +1,10 @@
+import StudentRegistryABI from '@/contracts/abi/StudentRegistry.json';
+
 // Contract addresses on Ethereum Mainnet
-export const STUDENT_REGISTRY_ADDRESS = '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb';
-export const OWNER_ADDRESS = '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb';
+// NOTE: This is a placeholder address. You need to deploy the contract and use the actual deployed address.
+// To deploy: npx hardhat run scripts/deploy-v2.js --network <your-network>
+export const STUDENT_REGISTRY_ADDRESS = '0x742D35cC6634c0532925a3b844BC9e7595F0Be00' as `0x${string}`;
+export const OWNER_ADDRESS = '0x742D35cC6634c0532925a3b844BC9e7595F0Be00' as `0x${string}`;
 
 // Chain configuration
 export const CHAIN_ID = 1; // Ethereum Mainnet
@@ -16,16 +20,8 @@ export const BASE_CONTRACT_ABI = [
   'event OwnershipTransferred(address indexed previousOwner, address indexed newOwner)'
 ];
 
-export const STUDENT_REGISTRY_ABI = [
-  'function registerStudent(string memory _name, uint256 _age, string memory _course, uint8 _level) external',
-  'function getStudent(address _studentAddress) external view returns (string memory, uint256, string memory, uint8)',
-  'function getAllStudents() external view returns (tuple(string name, uint256 age, string course, uint8 level, address ethereumAddress)[])',
-  'function updateCourse(address _studentAddress, string memory _newCourse) external',
-  'function resetRegistry() external',
-  'function getStudentCount() external view returns (uint256)',
-  'event StudentRegistered(address indexed studentAddress, string name, uint256 age, string course, uint8 level)',
-  'event CourseUpdated(address indexed studentAddress, string newCourse)'
-];
+// Use the proper JSON ABI instead of string-based ABI
+export const STUDENT_REGISTRY_ABI = StudentRegistryABI as any;
 
 export const COURSE_MANAGER_ABI = [
   'function createCourse(string memory _title, string memory _description, uint256 _duration, uint256 _maxStudents) external',

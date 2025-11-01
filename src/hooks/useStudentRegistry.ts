@@ -35,13 +35,31 @@ export const useStudentRegistry = () => {
     : false;
 
   // Register a new student
-  const { writeContractAsync: registerStudent, isPending: isRegistering } = useWriteContract();
+  const { writeContractAsync: registerStudent, isPending: isRegistering } = useWriteContract({
+    mutation: {
+      onError: (error) => {
+        console.error('Error in registerStudent:', error);
+      },
+    },
+  });
   
   // Update student course
-  const { writeContractAsync: updateCourse, isPending: isUpdating } = useWriteContract();
+  const { writeContractAsync: updateCourse, isPending: isUpdating } = useWriteContract({
+    mutation: {
+      onError: (error) => {
+        console.error('Error in updateCourse:', error);
+      },
+    },
+  });
   
   // Reset registry
-  const { writeContractAsync: resetRegistry, isPending: isResetting } = useWriteContract();
+  const { writeContractAsync: resetRegistry, isPending: isResetting } = useWriteContract({
+    mutation: {
+      onError: (error) => {
+        console.error('Error in resetRegistry:', error);
+      },
+    },
+  });
 
   // Get student by address
   const getStudent = async (studentAddress: string) => {
@@ -55,14 +73,14 @@ export const useStudentRegistry = () => {
 
     if (!data) return null;
     
-    const [name, age, course, level] = data as [string, bigint, string, number];
+    const [name, age, ethAddress, course, level] = data as [string, bigint, string, string, number];
     
     return {
       name,
       age: Number(age),
       course,
       level,
-      ethereumAddress: studentAddress
+      ethereumAddress: ethAddress
     } as Student;
   };
 
@@ -75,12 +93,13 @@ export const useStudentRegistry = () => {
   });
 
   // Format students data
+  // Student struct order: name, age, ethereumAddress, course, level
   const formattedStudents = (Array.isArray(students) ? students : []).map((student: any) => ({
     name: student[0],
     age: Number(student[1]),
-    course: student[2],
-    level: student[3],
-    ethereumAddress: student[4]
+    ethereumAddress: student[2],
+    course: student[3],
+    level: student[4]
   })) as Student[];
 
   // Watch for StudentRegistered event
@@ -115,14 +134,17 @@ export const useStudentRegistry = () => {
         abi: STUDENT_REGISTRY_ABI,
         address: STUDENT_REGISTRY_ADDRESS,
         functionName: 'registerStudent',
-        args: [name, BigInt(age), course, Number(level)],
+        args: [name, BigInt(age), course, level],
       });
       
       console.log('Registration successful:', result);
       return result;
     } catch (error) {
       console.error('Error in handleRegisterStudent:', error);
-      throw error;
+      if (error instanceof Error) {
+        throw new Error(`Failed to register student: ${error.message}`);
+      }
+      throw new Error('Failed to register student');
     }
   };
 
